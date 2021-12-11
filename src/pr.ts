@@ -3,7 +3,7 @@ import {PullRequestEvent} from '@octokit/webhooks-definitions/schema'
 import {Options} from './options'
 
 /**
- * Pull requests are linked automatically if the issue key is included in the pull request's title or in the source branch name
+ * Pull requests are linked automatically if the issue key is included in the pull request's title
  * @param event github pull request
  * @param project jira project, can be regex
  * @returns true if valid link to jira
@@ -14,7 +14,6 @@ export function validate(event: PullRequestEvent, options: Options): boolean {
 
   core.info('author ' + event.pull_request.user.login.toLowerCase())
   core.info('title ' + event.pull_request.title)
-  core.info('head ' + event.pull_request.head.ref)
 
   for (const author of options.ignoreAuthor) {
     if (event.pull_request.user.login.toLowerCase() == author.toLowerCase()) {
@@ -26,8 +25,5 @@ export function validate(event: PullRequestEvent, options: Options): boolean {
     return true
   }
 
-  if (event.pull_request.head.ref.match(re)) {
-    return true
-  }
   return false
 }
