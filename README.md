@@ -2,6 +2,8 @@
 
 Failing to link pull requests to issues can lead to a lack of visibility into the development process, making it difficult to track progress and identify potential issues early on.
 
+This Github Action checks Pull request title having `XYZ-123` format ex: `ENG-123 Update button color`. If a pull request does not follow this rule, the CI will fail blocking the pull request getting merged. 
+
 ## Usage
 
 - Create the following file `.github/workflows/jira-issue-key-checker.yml`
